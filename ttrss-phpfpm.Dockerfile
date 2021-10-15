@@ -10,7 +10,6 @@ RUN \
     setup \
     openssl \
   && \
-  cp -v /etc/yum.repos.d/*.repo /rootfs/etc/yum.repos.d/ && \
   dnf -y module enable \
     --installroot /rootfs \
     php:7.4 \
