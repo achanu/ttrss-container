@@ -10,7 +10,6 @@ RUN \
     setup \
     openssl \
   && \
-  cp -v /etc/yum.repos.d/*.repo /rootfs/etc/yum.repos.d/ && \
   dnf -y module enable \
     --installroot /rootfs \
     php:7.4 \
@@ -46,13 +45,19 @@ COPY --from=micro-build /rootfs/ /
 RUN \
   chown -c nginx /run/php-fpm /var/log/php-fpm && \
   sed -i \
-    -e '/^listen = / s#/run/php-fpm/www.sock#9000#g' \
+    -e '/^daemonize / s#[[:graph:]]*$#no#' \
+    -e '/^error_log / s#[[:graph:]]*$#/proc/1/fd/2#' \
+    /etc/php-fpm.conf \
+  && \
+  sed -i \
+    -e '/^listen = / s#[[:graph:]]*$#9000#' \
     -e '/^user = / s#^#;#g' \
     -e '/^group = / s#^#;#g' \
+    -e '/^access.log / s#[[:graph:]]*$#/proc/1/fd/1#' \
     /etc/php-fpm.d/www.conf
 
 USER nginx
-CMD ["/usr/sbin/php-fpm", "-F"]
+CMD ["/usr/sbin/php-fpm"]
 
 VOLUME /usr/share/nginx/html
 EXPOSE 9000/tcp
