@@ -32,9 +32,10 @@ RUN \
     php-process \
     httpd-filesystem \
   && \
-  dnf clean all \
-    --installroot /rootfs && \
-  rm -rf /rootfs/var/cache/*
+  rm -rf \
+    /rootfs/var/cache/* \
+    /rootfs/var/lib/{yum,dnf} \
+    /rootfs/var/log/{yum,dnf}*
 
 
 FROM scratch AS ttrss-micro

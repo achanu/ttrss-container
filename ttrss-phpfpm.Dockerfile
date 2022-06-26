@@ -29,9 +29,11 @@ RUN \
     php-fpm \
     php-ldap \
   && \
-  dnf clean all \
-    --installroot /rootfs && \
-  rm -rf /rootfs/var/cache/* && \
+  rm -rf \
+    /rootfs/var/cache/* \
+    /rootfs/var/lib/{yum,dnf} \
+    /rootfs/var/log/{yum,dnf}* \
+  && \
   mkdir -v /rootfs/run/php-fpm && \
   sed -i \
     -e '/^nginx:/ s#/sbin/nologin#/bin/bash#g' \
