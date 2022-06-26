@@ -56,7 +56,7 @@ RUN \
     -e '/^access.log / s#[[:graph:]]*$#/proc/1/fd/1#' \
     /etc/php-fpm.d/www.conf
 
-USER nginx
+USER 999
 CMD ["/usr/sbin/php-fpm"]
 
 VOLUME /usr/share/nginx/html

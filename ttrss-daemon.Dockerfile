@@ -42,7 +42,7 @@ LABEL maintainer="Alexandre Chanu <alexandre.chanu@gmail.com>"
 
 COPY --from=micro-build /rootfs/ /
 
-USER nginx
+USER 999
 CMD ["/usr/bin/php", "/usr/share/nginx/html/update_daemon2.php", "--log-level", "INFO"]
 
 VOLUME /usr/share/nginx/html
