@@ -13,7 +13,7 @@ RUN \
   cp -v /etc/yum.repos.d/*.repo /rootfs/etc/yum.repos.d/ && \
   dnf -y module enable \
     --installroot /rootfs \
-    php:7.4 \
+    php:8.0 \
   && \
   dnf install -y \
     --installroot /rootfs \
