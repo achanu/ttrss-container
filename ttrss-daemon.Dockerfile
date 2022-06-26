@@ -12,7 +12,7 @@ RUN \
   && \
   dnf -y module enable \
     --installroot /rootfs \
-    php:7.4 \
+    php:8.0 \
   && \
   dnf install -y \
     --installroot /rootfs \
@@ -32,7 +32,8 @@ RUN \
     php-process \
     httpd-filesystem \
   && \
-  dnf clean all && \
+  dnf clean all \
+    --installroot /rootfs && \
   rm -rf /rootfs/var/cache/*
 
 
@@ -41,7 +42,7 @@ LABEL maintainer="Alexandre Chanu <alexandre.chanu@gmail.com>"
 
 COPY --from=micro-build /rootfs/ /
 
-USER nginx
+USER 999
 CMD ["/usr/bin/php", "/usr/share/nginx/html/update_daemon2.php", "--log-level", "INFO"]
 
 VOLUME /usr/share/nginx/html
