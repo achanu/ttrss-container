@@ -29,7 +29,8 @@ RUN \
     php-fpm \
     php-ldap \
   && \
-  dnf clean all && \
+  dnf clean all \
+    --installroot /rootfs && \
   rm -rf /rootfs/var/cache/* && \
   mkdir -v /rootfs/run/php-fpm && \
   sed -i \

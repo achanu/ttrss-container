@@ -33,7 +33,8 @@ RUN \
     php-process \
     httpd-filesystem \
   && \
-  dnf clean all && \
+  dnf clean all \
+    --installroot /rootfs && \
   rm -rf /rootfs/var/cache/*
 
 
