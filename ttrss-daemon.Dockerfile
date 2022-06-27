@@ -12,7 +12,7 @@ RUN \
   && \
   dnf -y module enable \
     --installroot /rootfs \
-    php:8.0 \
+    php:7.4 \
   && \
   dnf install -y \
     --installroot /rootfs \
@@ -23,7 +23,7 @@ RUN \
     php-mbstring \
     php-opcache \
     php-pgsql \
-    php-xmlrpc \
+    php-xml \
     nginx-filesystem \
     git-core \
     php-cli \
